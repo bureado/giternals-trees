@@ -17,6 +17,16 @@ gives you the final hash of a `tree` that represents the subset of objects in th
 It's likely that using the index file makes this easier, but that would mess "semantically" with the repo. See [this note] from
 the `git-annex` folks on potentially moving to `mktree` but running into the same concern as above.
 
+I proceeded with the simplest example:
+
+```
+git ls-tree HEAD b | git mktree
+b9645f5603b4efe0368929ccf313145818fdc245
+
+git ls-tree b9645f5603b4efe0368929ccf313145818fdc245
+040000 tree 9020154eb21da8cb3fd6860ec7065e962c446ed6	b
+```
+
 ## References
 
 * https://jwiegley.github.io/git-from-the-bottom-up/1-Repository/4-how-trees-are-made.html
