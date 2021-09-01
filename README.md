@@ -27,6 +27,8 @@ git ls-tree b9645f5603b4efe0368929ccf313145818fdc245
 040000 tree 9020154eb21da8cb3fd6860ec7065e962c446ed6	b
 ```
 
+Also see [Tree objects](https://git-scm.com/book/en/v2/Git-Internals-Git-Objects#_tree_objects).
+
 ## Referring to a subtree
 
 A `ref` points to a `commit` points to a `tree`. Can we skip the `commit`? We start from:
@@ -48,6 +50,9 @@ git ls-tree $(git cat-file -p `cat .git/refs/heads/master` | grep '^tree' | cut 
 040000 tree 9020154eb21da8cb3fd6860ec7065e962c446ed6	b
 040000 tree 6e36c7dfb97e11e9e5877e4e366b7b18afa7a8be	c
 ```
+
+I tried with `git update-ref refs/subtrees/simple b9645f5603b4efe0368929ccf313145818fdc245` but how does it know
+that `b96...` is a tree?
 
 ## References
 
