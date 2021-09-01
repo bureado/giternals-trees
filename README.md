@@ -68,6 +68,8 @@ a `Makefile` that creates many binary artifacts. Imagine that `make` can assert 
 particular artifact, then create a subtree and commit a ref to it. And now, imagine that in future runs only this subtree is checked
 out for a given `make` run.
 
+(TODO and unclear if this would be with `checkout <treeish>` or `read-tree` or something else.)
+
 ## References
 
 * https://jwiegley.github.io/git-from-the-bottom-up/1-Repository/4-how-trees-are-made.html
