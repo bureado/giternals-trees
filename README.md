@@ -51,8 +51,22 @@ git ls-tree $(git cat-file -p `cat .git/refs/heads/master` | grep '^tree' | cut 
 040000 tree 6e36c7dfb97e11e9e5877e4e366b7b18afa7a8be	c
 ```
 
-I tried with `git update-ref refs/subtrees/simple b9645f5603b4efe0368929ccf313145818fdc245` but how does it know
-that `b96...` is a tree?
+I tried with `git update-ref refs/subtrees/simple b9645f5603b4efe0368929ccf313145818fdc245` (aka a _lightweight_ ref) but how does it know
+that `b96...` is a tree? Turns out it does:
+
+```
+git for-each-ref
+...
+b9645f5603b4efe0368929ccf313145818fdc245 tree	refs/subtrees/simple
+```
+
+## "Checking out" a subtree
+
+In the next step, I'd like to change the working tree to the subtree, to limit the files that a process "sees" on disk. This is in
+connection with my experiments on build systems helping "dereference" binary-to-commit hash references. Imagine a large repo with
+a `Makefile` that creates many binary artifacts. Imagine that `make` can assert which inputs from the repo were used to build a
+particular artifact, then create a subtree and commit a ref to it. And now, imagine that in future runs only this subtree is checked
+out for a given `make` run.
 
 ## References
 
