@@ -27,6 +27,28 @@ git ls-tree b9645f5603b4efe0368929ccf313145818fdc245
 040000 tree 9020154eb21da8cb3fd6860ec7065e962c446ed6	b
 ```
 
+## Referring to a subtree
+
+A `ref` points to a `commit` points to a `tree`. Can we skip the `commit`? We start from:
+
+```
+git cat-file -p `cat .git/refs/heads/master`
+
+tree 20bd0698e81a9df2d650df7a1de24e6366618df7
+parent daec7dadfc2e1e23a855d301dd0d74eea3863faa
+...
+```
+
+and this naive enumeration of the index:
+
+```
+git ls-tree $(git cat-file -p `cat .git/refs/heads/master` | grep '^tree' | cut -f2 -d' ')
+100644 blob f9e334c8a740ce3c72c8364c97c39fba0756d089	README.md
+040000 tree ccf241bf540a57f540ca43bf9494c4365d54434a	a
+040000 tree 9020154eb21da8cb3fd6860ec7065e962c446ed6	b
+040000 tree 6e36c7dfb97e11e9e5877e4e366b7b18afa7a8be	c
+```
+
 ## References
 
 * https://jwiegley.github.io/git-from-the-bottom-up/1-Repository/4-how-trees-are-made.html
